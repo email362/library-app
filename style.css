@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* 100vw needs max-width 100% to avoid a horizontal overflow bug that 
+    doubles the width so that its effectively 200vw */
+    width:100vw;
+    max-width: 100%;
+}
+header {
+    text-align: center;
+}
+#bookshelf {
+    width: 100%;
+    margin:0;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.book {
+    width: 230px;
+    text-align: center;
+    border: 1px solid black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.book h3 {
+    font-size: 25px;
+}
+
+.book h5 {
+    font-size: 15px;
+}
