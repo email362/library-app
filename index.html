@@ -11,9 +11,33 @@
     <div id='container'>
         <header>
             <h1>The Library</h1>
+            <div>
+                <label for='Title'>Title:</label>
+                <input class='newBookInput' type="text" name="Title" id="inputTitle">
+                <label for='newAuthor'>Author:</label>
+                <input class='newBookInput' type="text" name="newAuthor" id="inputAuthor">
+                <label for='newPages'>Pages</label>
+                <input class='newBookInput' type="number" name="newPages" id="inputPages">
+                <div id='readRadio'>
+                    <input type="radio" name="status" id="hasRead" value='Read'>
+                    <label for="hasRead">Read</label>
+                    <input type="radio" name="status" id="hasntRead" value='Unread' checked>
+                    <label for="hasntRead">Unread</label>                    
+                </div>
+
+                <button id='addBook'>Add Book</button>
+            </div>
         </header>
         <section id='bookshelf'>
             <div class='book'>
+                <div class='bookButtons'>
+                    <button id='deleteButton'>
+                        Delete
+                    </button>
+                    <button id='editButton'>
+                        Edit
+                    </button>
+                </div>
                 <h3>Title</h3>
                 <h5>Author</h5>
                 <p>365</p>
@@ -32,9 +56,7 @@
                 <p style="color:red">Unread</p>
             </div>
         </section>
-        <div>
-            <button id='addBook'>click</button>
-        </div>
+
     </div>
 <script src="script.js"></script>
 </body>

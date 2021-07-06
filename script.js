@@ -8,27 +8,53 @@ function Book(title, author, pages, readStatus) {
 
 }
 
-Book.prototype.toString = () => console.log(this.name, this.title);
+Book.prototype.toString = () => console.log(this.title, this.author);
 
 function addBookToLibrary() {
-    let newBook = new Book('helloTitle','helloAuthor',345, 'Unread');
+    
+    myLibrary.push(new Book(document.getElementById('inputTitle').value,document.getElementById('inputAuthor').value,document.getElementById('inputPages').value, 'Unread'));
     let bookshelf = document.getElementById('bookshelf');
     let bookEle = document.createElement('div');
+
+    let buttonDiv = document.createElement('div');
+    buttonDiv.setAttribute('class', 'bookButtons');
+    
+    let deleteButton = document.createElement('button');
+    deleteButton.setAttribute('id','deleteButton');
+    deleteButton.textContent = 'Delete';
+
+    let editButton = document.createElement('button');
+    editButton.setAttribute('id','editButton');
+    editButton.textContent = 'Edit';
+
+    buttonDiv.appendChild(deleteButton);
+    buttonDiv.appendChild(editButton);
+
     let titleEle = document.createElement('h3');
-    titleEle.textContent = newBook.title;
+    titleEle.textContent = book.title;
     let authEle = document.createElement('h5');
-    authEle.textContent = newBook.author;
+    authEle.textContent = book.author;
     let pageEle = document.createElement('p');
-    pageEle.textContent = newBook.pages;
+    pageEle.textContent = book.pages;
     let readEle = document.createElement('p');
-    readEle.textContent = newBook.readStatus;
+    readEle.textContent = book.readStatus;
     bookEle.setAttribute('class','book');
+    
+    bookEle.appendChild(buttonDiv);
     bookEle.appendChild(titleEle);
     bookEle.appendChild(authEle);
     bookEle.appendChild(pageEle);
     bookEle.appendChild(readEle);
     bookshelf.appendChild(bookEle);
-    newBook.toString();
+    console.log(book.title);
+
+}
+document.getElementById('addBook').addEventListener('click',addBookToLibrary);
+
+function removeBookFromLibrary(bookToBeRemoved) {
+
 }
 
-document.getElementById('addBook').addEventListener('click',addBookToLibrary);
+function displayLibrary() {
+    
+}

@@ -4,32 +4,94 @@
     padding: 0;
     /* 100vw needs max-width 100% to avoid a horizontal overflow bug that 
     doubles the width so that its effectively 200vw */
+}
+html,body {
     width:100vw;
     max-width: 100%;
+    height:100%;
+    background-color: steelblue;
+    color:whitesmoke;
 }
 header {
     text-align: center;
 }
 #bookshelf {
-    width: 100%;
-    margin:0;
+    /* border: 1px solid whitesmoke; */
+    width: 96%;
+    margin:0 auto;
     display:flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content:start;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-
 .book {
+    background-color: white;
+    color: black;
     width: 230px;
     text-align: center;
     border: 1px solid black;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
 }
-
 .book h3 {
     font-size: 25px;
+    margin-bottom: 5px;
 }
-
 .book h5 {
     font-size: 15px;
+    margin-bottom: 5px;
+}
+.book p {
+    margin-top: 10px;
+}
+.newBookInput {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+#addBook {
+    width: 50%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.bookButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.bookButtons button {
+    width: 50%;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: initial;
+    border:initial;
+    border-bottom: 1px solid black;
+}
+
+#deleteButton {
+    border-right:1px solid black;
+}
+
+#deleteButton:hover {
+    background-color: red;
+    color: white;
+    height: initial;
+    border: initial;
+}
+
+#editButton:hover {
+    background-color: green;
+    color: white;
+    height: initial;
+    border: initial;
+}
+
+#readRadio {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }
