@@ -27,10 +27,11 @@ function addBookToLibrary() {
 }
 document.getElementById('addBook').addEventListener('click',addBookToLibrary);
 
-function removeBookFromLibrary(bookToBeRemoved) {
-
+function removeBookFromLibrary(dataIndex) {
+    myLibrary.splice(Number(dataIndex),1);
+    console.log('Delete Successful');
 }
 
 function displayLibrary() {
-
+    
 }
