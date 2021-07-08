@@ -72,18 +72,18 @@ header {
     border-bottom: 1px solid black;
 }
 
-#deleteButton {
+.deleteButton {
     border-right:1px solid black;
 }
 
-#deleteButton:hover {
+.deleteButton:hover {
     background-color: red;
     color: white;
     height: initial;
     border: initial;
 }
 
-#editButton:hover {
+.editButton:hover {
     background-color: green;
     color: white;
     height: initial;
