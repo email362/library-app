@@ -8,7 +8,9 @@ function Book(title, author, pages, readStatus) {
 
 }
 
-Book.prototype.toString = () => console.log(this.title, this.author);
+Book.prototype.toString = function() {
+    console.log(this.title, this.author);
+};
 
 // function goal: get user input, turn it into a book object, 
 // add that book object to the myLibrary array
@@ -22,6 +24,48 @@ function addBookToLibrary() {
     let newBook = new Book(newTitle,newAuthor,newPages,newStatus);
 
     myLibrary.push(newBook);
+
+    let bookshelf = document.getElementById('bookshelf');
+
+    let bookContainer = document.createElement('div');
+    let bookButtons = document.createElement('section');
+    let deleteButton = document.createElement('button');
+    let editButton = document.createElement('button');
+    let title = document.createElement('h3');
+    let author = document.createElement('h5');
+    let pages = document.createElement('p');
+    let status = document.createElement('p');
+
+    editButton.textContent = 'Edit';
+    deleteButton.textContent = 'Delete';
+    title.textContent = newTitle;
+    author.textContent = newAuthor;
+    pages.textContent = newPages;
+    status.textContent = newStatus;
+
+    bookContainer.setAttribute('class','book');
+    bookContainer.dataset.index = myLibrary.length - 1;
+    bookButtons.setAttribute('class','bookButtons');
+    deleteButton.setAttribute('id','deleteButton');
+    editButton.setAttribute('id','editButton');
+    if(newStatus == 'Read') {
+        status.setAttribute('style','color: green');
+    } else {
+        status.setAttribute('style','color: red');
+    }
+
+    bookContainer.appendChild(bookButtons);
+    bookContainer.appendChild(title);
+    bookContainer.appendChild(author);
+    bookContainer.appendChild(pages);
+    bookContainer.appendChild(status);
+
+    bookButtons.appendChild(deleteButton);
+    bookButtons.appendChild(editButton);
+
+    bookshelf.appendChild(bookContainer);
+
+
     console.log(myLibrary);
 
 }
