@@ -1,191 +1,157 @@
-let myLibrary = [];
+class Book {
 
+    static bookId = 0;
 
+    constructor(title='Title', author='Author', pages=100, readStatus='unread') {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus.toLowerCase();
+        this.id = Book.bookId;
+        Book.bookId++;
 
-
-
-function Book(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-
-}
-
-Book.prototype.toString = function() {
-    console.log(this.title, this.author);
-};
-
-Book.prototype.toggleStatus = function() {
-    if(this.readStatus == 'Read') {
-        this.readStatus = 'Unread';
-
-    } else {
-        this.readStatus = 'Read';
-    }
-};
-
-// function goal: get user input, turn it into a book object, 
-// add that book object to the myLibrary array
-
-function addBookToLibrary() {
-    let newTitle = document.getElementById('inputTitle').value;
-    let newAuthor = document.getElementById('inputAuthor').value;
-    let newPages = document.getElementById('inputPages').value;
-    let newStatus = document.querySelector('input[name=status]:checked').value;
-
-    let newBook = new Book(newTitle,newAuthor,newPages,newStatus);
-
-    myLibrary.push(newBook);
-
-    let bookshelf = document.getElementById('bookshelf');
-
-    let bookContainer = document.createElement('div');
-    let bookButtons = document.createElement('section');
-    let deleteButton = document.createElement('button');
-    let editButton = document.createElement('button');
-    let title = document.createElement('h3');
-    let author = document.createElement('h5');
-    let pages = document.createElement('p');
-    let status = document.createElement('p');
-
-    editButton.textContent = 'Read';
-    deleteButton.textContent = 'Delete';
-    title.textContent = newTitle;
-    author.textContent = newAuthor;
-    pages.textContent = newPages;
-    status.textContent = newStatus;
-
-    bookContainer.setAttribute('class','book');
-    bookContainer.dataset.index = myLibrary.length - 1;
-    bookButtons.setAttribute('class','bookButtons');
-    deleteButton.setAttribute('class','deleteButton');
-    editButton.setAttribute('class','editButton');
-    if(newStatus == 'Read') {
-        status.setAttribute('style','color: green');
-    } else {
-        status.setAttribute('style','color: red');
+        
     }
 
-    bookContainer.appendChild(bookButtons);
-    bookContainer.appendChild(title);
-    bookContainer.appendChild(author);
-    bookContainer.appendChild(pages);
-    bookContainer.appendChild(status);
-
-    bookButtons.appendChild(deleteButton);
-    bookButtons.appendChild(editButton);
-
-    deleteButton.addEventListener('click', (e) => {
-        e.target.parentNode.parentNode.remove();
-        removeBookFromLibrary(e.target.parentNode.parentNode.dataset.index);
-    });
-
-    editButton.addEventListener('click', (e) => {
-        changeStatus(e.target.parentNode.parentNode.dataset.index);
-        console.log(myLibrary);
-    });
-
-    bookshelf.appendChild(bookContainer);
-
-
-
-    console.log(myLibrary);
-
-}
-document.getElementById('addBook').addEventListener('click',addBookToLibrary);
-
-function removeBookFromLibrary(dataIndex) {
-    myLibrary.splice(Number(dataIndex),1);
-    console.log('Delete Successful');
-    document.querySelectorAll('.book').forEach((book, index )=> {
-        book.dataset.index = index;
-    });
-}
-
-function changeStatus(dataIndex) {
-    let book = myLibrary[Number(dataIndex)];
-    book.toggleStatus();
-    let domBook = document.querySelector(`[data-index = "${dataIndex}"]`);
-    if (book.readStatus == 'Read') {
-        domBook.lastElementChild.textContent = 'Read';
-        domBook.lastElementChild.setAttribute('style','color:green');
-    } else {
-        domBook.lastElementChild.textContent = 'Unread';
-        domBook.lastElementChild.setAttribute('style','color:red');
+    toString = () => {
+        console.log(this.title, this.author);
     }
-    console.log(myLibrary[Number(dataIndex)].readStatus);
-}
 
-function displayLibrary() {
-
-    if (myLibrary.length == 0) {
-        myLibrary.push(new Book('The Hobbit','J.R.R. Tolkien',310,'Unread'));
-        myLibrary.push(new Book('Do Robots Dream of Electric Sheep?','Philip K. Dick',210, 'Read'));
-        myLibrary.push(new Book("Hitchhiker's Guide to the Galaxy",'Douglas Adams',180,'Read'));
+    get status ()  {
+        return this.readStatus;
     }
-        let bookshelf = document.getElementById('bookshelf');
 
-        myLibrary.forEach((book, index) => {
+    set status(value) {
+        this.readStatus = value;
+    }
 
-            let bookContainer = document.createElement('div');
-            let bookButtons = document.createElement('section');
-            let deleteButton = document.createElement('button');
-            let editButton = document.createElement('button');
-            let title = document.createElement('h3');
-            let author = document.createElement('h5');
-            let pages = document.createElement('p');
-            let status = document.createElement('p');
+    toggleStatus = () => {
+        if(this.status == 'read') {
+            this.status = 'unread';
+        }
+        else if(this.status == 'unread') {
+            this.status = 'read';
+        }
+    }
 
-            editButton.textContent = 'Read';
-            deleteButton.textContent = 'Delete';
-            title.textContent = book.title;
-            author.textContent = book.author;
-            pages.textContent = book.pages;
-            status.textContent = book.readStatus;
+    display = () => {
 
-            bookContainer.setAttribute('class','book');
-            bookContainer.dataset.index = index;
-            bookButtons.setAttribute('class','bookButtons');
-            deleteButton.setAttribute('class','deleteButton');
-            editButton.setAttribute('class','editButton');
-            if(book.readStatus == 'Read') {
-                status.setAttribute('style','color: green');
-            } else {
-                status.setAttribute('style','color: red');
-            }
+        let bookContainer = document.createElement('div');
+        let bookButtons = document.createElement('section');
+        let deleteButton = document.createElement('button');
+        let editButton = document.createElement('button');
+        let title = document.createElement('h3');
+        let author = document.createElement('h5');
+        let pages = document.createElement('p');
+        let status = document.createElement('p');
 
-            bookContainer.appendChild(bookButtons);
-            bookContainer.appendChild(title);
-            bookContainer.appendChild(author);
-            bookContainer.appendChild(pages);
-            bookContainer.appendChild(status);
+        editButton.textContent = 'Read';
+        deleteButton.textContent = 'Delete';
+        title.textContent = this.title;
+        author.textContent = this.author;
+        pages.textContent = this.pages;
+        status.textContent = this.status;
 
-            bookButtons.appendChild(deleteButton);
-            bookButtons.appendChild(editButton);
+        bookContainer.setAttribute('class','book');
+        bookContainer.setAttribute('id', this.id);
+        bookButtons.setAttribute('class','bookButtons');
+        deleteButton.setAttribute('class','deleteButton');
+        editButton.setAttribute('class','editButton');
+        if(this.status == 'read') {
+            status.classList.add('read');
+        } else {
+            status.classList.add('unread');
+        }
+        
+        bookContainer.appendChild(bookButtons);
+        bookContainer.appendChild(title);
+        bookContainer.appendChild(author);
+        bookContainer.appendChild(pages);
+        bookContainer.appendChild(status);
 
-            bookshelf.appendChild(bookContainer);
+        bookButtons.appendChild(deleteButton);
+        bookButtons.appendChild(editButton);
+
+        editButton.addEventListener('click', (e) => {
+
+            let statusEle = document.getElementById(''+this.id).lastChild;
+
+            statusEle.classList.remove(this.status.toLowerCase());
+            
+            this.toggleStatus();
+
+            statusEle.textContent = this.status;
+            
+            statusEle.classList.add(this.status.toLowerCase());
+            
         });
 
-        document.querySelectorAll('.deleteButton').forEach((button) => {
-            button.addEventListener('click', (e) => {
-                console.log(e);
-                removeBookFromLibrary(e.target.parentNode.parentNode.dataset.index);
+        return bookContainer;
+
+    }
+
+}
+
+
+
+
+
+class Library {
+    constructor(books = [], domId) {
+        this.books = books;
+        this.displayShelf = document.getElementById(domId);
+    }
+
+    addBook = (title, author, pages, status) => {
+        let book = new Book(title,author,pages,status);
+
+        let bookElement = book.display();
+        
+        this.books.push(book);
+
+        bookElement.firstElementChild.firstElementChild.addEventListener('click', (e) => {
+            this.removeBook(e.target.parentNode.parentNode.id);
+            e.target.parentNode.parentNode.remove();
+        });
+
+        this.displayShelf.appendChild(bookElement);
+
+        console.log({books:this.books});
+    }
+
+    removeBook = (id) => {
+        this.books.forEach((book,index) => {
+            if(book.id == Number(id)) {
+                this.books.splice(index,1);
+                console.log('Book Removed');
+                return;
+            }
+        });
+        console.log({books:this.books});
+    }
+
+    display = () => {
+
+        document.getElementById('addBook').addEventListener('click', e => {
+            this.addBook(document.getElementById('inputTitle').value, document.getElementById('inputAuthor').value, document.getElementById('inputPages').value, document.querySelector('input[name=status]:checked').value);
+
+        })
+
+        this.books.forEach(book => {
+            let bookElement = book.display();
+            this.displayShelf.appendChild(bookElement);
+
+            bookElement.firstElementChild.firstElementChild.addEventListener('click', (e) => {
+                this.removeBook(e.target.parentNode.parentNode.id);
                 e.target.parentNode.parentNode.remove();
             });
-        });
-        let editButtons = document.querySelectorAll('.editButton');
-        // console.log(editButtons);
-        editButtons.forEach( (button) => {
-            // console.log(button);
-            button.addEventListener('click', (e) => {
-                changeStatus(e.target.parentNode.parentNode.dataset.index);
-                // console.log(myLibrary);
 
-            });
         });
 
-    
+    }
+
 }
+    
+let lib = new Library([new Book('The Hobbit','J.R.R. Tolkien',310,'unread'), new Book('Do Robots Dream of Electric Sheep?','Philip K. Dick',210, 'read'), new Book("Hitchhiker's Guide to the Galaxy",'Douglas Adams',180,'read')],'bookshelf');
 
-window.addEventListener('load', displayLibrary);
+window.addEventListener('load', lib.display());

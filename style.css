@@ -95,3 +95,10 @@ header {
     margin: 0 auto;
     margin-bottom: 10px;
 }
+.read {
+    color: green;
+}
+
+.unread {
+    color: red;
+}
